@@ -290,20 +290,34 @@ button:disabled { opacity: .6; cursor: default; }
 
 .comprobante .link { display: block; margin: 22px auto 0; }
 
-.opciones-correo { margin-top: 14px; font-size: 14px; text-align: center; color: var(--muted); }
-.opciones-correo a,
-.opciones-correo button,
-.opciones-correo button:hover {
-  display: inline;
-  width: auto;
-  margin: 0;
-  padding: 0;
-  background: none;
-  color: var(--blue);
-  font-size: inherit;
-  font-weight: 700;
+/* Opciones que se despliegan al pulsar "Enviar solicitud por correo" */
+.opciones-envio { margin-top: 14px; }
+.opciones-titulo { margin: 0 0 10px !important; font-weight: 700; color: var(--text) !important; }
+.opciones-lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-.estado-copiado { display: block; margin-top: 6px; color: var(--green); font-weight: 700; }
+.opcion-envio,
+.opcion-envio:hover {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  color: var(--navy);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.opcion-envio:hover { border-color: var(--cyan); background: var(--info-bg); }
+.opciones-nota { margin: 12px 0 0 !important; font-size: 13px; }
+.estado-copiado { display: block; margin-top: 10px; color: var(--green); font-weight: 700; }
 
 /* ---------------------------------------------------------------- Pie de página */
 

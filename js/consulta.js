@@ -17,6 +17,10 @@ $("fecha").max = new Date().toISOString().slice(0, 10);
 $("formConsulta").addEventListener("submit", consultar);
 $("btnNuevaConsulta").addEventListener("click", nuevaConsulta);
 
+// "Despierta" el servicio de Google mientras la persona llena el formulario:
+// la primera petición tras un rato sin uso tarda más, así no la sufre al consultar.
+fetch(CONFIG.APPS_SCRIPT_URL).catch(() => {});
+
 async function consultar(evento) {
   evento.preventDefault(); // evita que el formulario recargue la página
 
@@ -166,36 +170,56 @@ function armarCorreo(data, tipo, numero) {
   return { para: CONFIG.CORREO_PARA, copia: CONFIG.CORREO_COPIA, asunto: CONFIG.ASUNTO_CORREO, cuerpo };
 }
 
-// Botón principal (aplicación de correo) + alternativas (Gmail y copiar)
+// Botón "Enviar solicitud por correo": despliega las formas de enviarla.
+// En computadores casi nunca hay una aplicación de correo configurada (mailto: solo abre
+// el navegador), por eso se ofrecen Gmail y Outlook en la web, además de copiar el mensaje.
 function accionesCorreo(correo) {
-  const botonCorreo = crear("a", "Enviar solicitud por correo");
-  botonCorreo.className = "boton";
-  botonCorreo.href = "mailto:" + correo.para +
-    "?cc=" + encodeURIComponent(correo.copia) +
-    "&subject=" + encodeURIComponent(correo.asunto) +
-    "&body=" + encodeURIComponent(correo.cuerpo);
+  const c = encodeURIComponent;
 
-  const gmail = crear("a", "Abrir en Gmail");
-  gmail.target = "_blank";
-  gmail.rel = "noopener";
-  gmail.href = "https://mail.google.com/mail/?view=cm&fs=1" +
-    "&to=" + encodeURIComponent(correo.para) +
-    "&cc=" + encodeURIComponent(correo.copia) +
-    "&su=" + encodeURIComponent(correo.asunto) +
-    "&body=" + encodeURIComponent(correo.cuerpo);
+  const botonCorreo = crearCon("button", "boton", "Enviar solicitud por correo");
+  botonCorreo.type = "button";
 
-  const estado = crear("span");
-  estado.className = "estado-copiado";
+  const gmail = enlaceExterno("Gmail",
+    "https://mail.google.com/mail/?view=cm&fs=1&to=" + c(correo.para) + "&cc=" + c(correo.copia) +
+    "&su=" + c(correo.asunto) + "&body=" + c(correo.cuerpo));
+
+  const outlook = enlaceExterno("Outlook / Hotmail",
+    "https://outlook.live.com/mail/0/deeplink/compose?to=" + c(correo.para) + "&cc=" + c(correo.copia) +
+    "&subject=" + c(correo.asunto) + "&body=" + c(correo.cuerpo));
+
+  const aplicacion = crearCon("a", "opcion-envio", "Aplicación de correo");
+  aplicacion.href = "mailto:" + correo.para + "?cc=" + c(correo.copia) +
+    "&subject=" + c(correo.asunto) + "&body=" + c(correo.cuerpo);
+
+  const estado = crearCon("span", "estado-copiado");
   estado.hidden = true;
 
-  const copiar = crear("button", "Copiar mensaje");
+  const copiar = crearCon("button", "opcion-envio", "Copiar mensaje");
   copiar.type = "button";
   copiar.addEventListener("click", () => copiarMensaje(correo, estado));
 
-  const opciones = crear("p", "¿No se abrió tu correo? ", gmail, " · ", copiar, estado);
-  opciones.className = "opciones-correo";
+  const opciones = crearCon("div", "opciones-envio",
+    crearCon("p", "opciones-titulo", "¿Desde dónde quieres enviarla?"),
+    crearCon("div", "opciones-lista", gmail, outlook, aplicacion, copiar),
+    estado,
+    crearCon("p", "opciones-nota", "Recuerda adjuntar la certificación bancaria antes de enviar el correo.")
+  );
+  opciones.hidden = true;
+
+  botonCorreo.addEventListener("click", () => {
+    opciones.hidden = !opciones.hidden;
+    if (!opciones.hidden) opciones.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
 
   return [botonCorreo, opciones];
+}
+
+function enlaceExterno(texto, url) {
+  const a = crearCon("a", "opcion-envio", texto);
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  return a;
 }
 
 async function copiarMensaje(correo, estado) {
