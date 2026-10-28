@@ -1,0 +1,347 @@
+/* Identidad visual FODEOCCI - estilo "Paso a paso" (página pública y base del panel) */
+
+/* Colores oficiales tomados del logo: azul #1f294d, cian #00a2dd, rojo #e42a53 */
+:root {
+  --navy: #1f294d;
+  --navy2: #131a33;
+  --blue: #0a6fb5;
+  --cyan: #00a2dd;
+  --pink: #e42a53;
+  --pink-oscuro: #c51d43;
+  --bg: #f3f6fb;
+  --text: #1f294d;
+  --muted: #6c7f91;
+  --line: #dbe4ec;
+  --green-bg: #eaf8f1;
+  --green: #0a7a4d;
+  --danger-bg: #fff0f3;
+  --danger: #ac2940;
+  --info-bg: #eef4fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+}
+
+[hidden] { display: none !important; }
+
+a { color: var(--blue); }
+
+/* ---------------------------------------------------------------- Encabezado */
+
+.encabezado { background: white; border-bottom: 1px solid var(--line); }
+
+.encabezado-contenido {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* El SVG del logo trae márgenes internos, por eso la altura es mayor que la del logo visible */
+.logo { height: 64px; width: auto; display: block; }
+
+.encabezado a { font-size: 14px; font-weight: 700; text-decoration: none; }
+
+/* ---------------------------------------------------------------- Contenedor principal */
+
+.contenedor { max-width: 1080px; margin: 32px auto; padding: 0 24px; }
+
+.tarjeta-principal {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(18, 52, 90, .08);
+}
+
+/* ---------------------------------------------------------------- Columna informativa (pasos) */
+
+.columna-info {
+  position: relative;
+  overflow: hidden;
+  padding: 44px 44px 36px;
+  background: linear-gradient(160deg, var(--navy2) 0%, var(--navy) 45%, var(--blue) 100%);
+  color: white;
+}
+
+/* Círculos decorativos de fondo */
+.columna-info::before,
+.columna-info::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.columna-info::before { width: 340px; height: 340px; right: -120px; bottom: -140px; background: rgba(0, 162, 221, .22); }
+.columna-info::after { width: 180px; height: 180px; right: 70px; bottom: 90px; border: 2px solid rgba(255, 255, 255, .10); }
+.columna-info > * { position: relative; z-index: 1; }
+
+.eyebrow { font-size: 12px; letter-spacing: 1.4px; font-weight: 800; color: var(--blue); }
+.columna-info .eyebrow { color: #9fe3f7; }
+
+.titular { font-size: 36px; line-height: 1.15; margin: 10px 0 12px; color: white; }
+
+.intro { color: rgba(255, 255, 255, .85); font-size: 17px; line-height: 1.6; margin: 0 0 28px; }
+
+.pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+
+.paso {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+/* Línea vertical que une los círculos */
+.paso:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 50px;
+  bottom: -18px;
+  width: 2px;
+  background: rgba(255, 255, 255, .25);
+}
+
+.paso-numero {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 18px;
+}
+.paso:nth-child(1) .paso-numero { background: var(--cyan); color: white; }
+
+.paso h3 { margin: 2px 0 4px; font-size: 17px; color: white; }
+.paso p { margin: 0; color: rgba(255, 255, 255, .78); font-size: 15px; line-height: 1.5; }
+
+.sello-seguridad {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .18);
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.sello-seguridad svg { flex: 0 0 auto; margin-top: 1px; }
+
+/* ---------------------------------------------------------------- Columna del formulario */
+
+.columna-form {
+  background: white;
+  padding: 44px 40px;
+  display: flex;
+  align-items: center;
+}
+.columna-form .card { margin: 0; width: 100%; padding: 0; box-shadow: none; border-radius: 0; }
+
+/* ---------------------------------------------------------------- Tarjeta y formularios */
+
+.card {
+  max-width: 480px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(18, 52, 90, .10);
+}
+
+h1 { font-size: 26px; margin: 6px 0; }
+
+.titulo-card { font-size: 24px; margin: 6px 0 4px; color: var(--navy); }
+
+.muted { color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
+
+label { display: block; font-weight: 700; margin: 18px 0 6px; }
+
+select,
+input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  color: inherit;
+  background: white;
+}
+select:focus,
+input:focus { outline: 2px solid var(--cyan); outline-offset: 1px; }
+
+button,
+.boton {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border: 0;
+  border-radius: 13px;
+  background: var(--pink);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover,
+.boton:hover { background: var(--pink-oscuro); }
+button:disabled { opacity: .6; cursor: default; }
+
+.link,
+.link:hover {
+  width: auto;
+  margin: 14px auto 0;
+  padding: 0;
+  background: none;
+  color: var(--blue);
+}
+
+.nota-privacidad { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 18px 0 0; }
+
+/* ---------------------------------------------------------------- Resultados */
+
+.resultado { margin-top: 24px; padding: 20px; border-radius: 14px; line-height: 1.55; }
+.resultado p { margin: 8px 0; }
+.resultado.con-saldo { background: var(--green-bg); }
+.resultado.con-saldo h2 { color: var(--green); margin: 0 0 10px; font-size: 21px; }
+.resultado.sin-saldo { background: var(--info-bg); }
+.resultado.error { background: var(--danger-bg); color: var(--danger); }
+
+/* ---------------------------------------------------------------- Comprobante (resultado de la consulta) */
+
+.comprobante {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 40px 40px 30px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(18, 52, 90, .08);
+  text-align: center;
+}
+
+.comprobante-icono {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.comprobante-icono.exito { background: var(--green-bg); color: var(--green); }
+.comprobante-icono.info { background: var(--info-bg); color: var(--blue); }
+.comprobante-icono.error { background: var(--danger-bg); color: var(--danger); }
+
+.comprobante h2 { font-size: 24px; line-height: 1.25; margin: 6px 0 10px; color: var(--navy); }
+.comprobante p { color: var(--muted); line-height: 1.6; margin: 8px 0; }
+.comprobante p strong { color: var(--text); }
+
+.comprobante .comprobante-monto {
+  margin: 4px 0 6px;
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  color: var(--navy);
+}
+
+/* Datos tipo recibo, con líneas punteadas arriba y abajo */
+.comprobante-detalles {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 16px 0;
+  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+  text-align: left;
+}
+.comprobante-detalles div { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; }
+.comprobante-detalles dt { color: var(--muted); }
+.comprobante-detalles dd { margin: 0; font-weight: 700; text-align: right; }
+
+.solicitud {
+  margin-top: 4px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--bg);
+  text-align: left;
+}
+.solicitud .eyebrow { display: block; margin-bottom: 4px; }
+
+.comprobante .link { display: block; margin: 22px auto 0; }
+
+.opciones-correo { margin-top: 14px; font-size: 14px; text-align: center; color: var(--muted); }
+.opciones-correo a,
+.opciones-correo button,
+.opciones-correo button:hover {
+  display: inline;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: var(--blue);
+  font-size: inherit;
+  font-weight: 700;
+}
+.estado-copiado { display: block; margin-top: 6px; color: var(--green); font-weight: 700; }
+
+/* ---------------------------------------------------------------- Pie de página */
+
+.pie { margin-top: 22px; font-size: 13px; color: var(--muted); text-align: center; line-height: 1.6; }
+.pie a { color: var(--muted); }
+
+/* ---------------------------------------------------------------- Celulares y tabletas */
+
+@media (max-width: 860px) {
+  .contenedor { margin: 16px auto; padding: 0 12px; }
+  .tarjeta-principal { grid-template-columns: 1fr; border-radius: 18px; }
+  .columna-info { padding: 26px 22px 22px; }
+  .titular { font-size: 28px; }
+  .intro { font-size: 16px; margin-bottom: 20px; }
+  .pasos { gap: 16px; }
+  .paso:not(:last-child)::after { bottom: -12px; }
+  .sello-seguridad { margin-top: 22px; }
+  .columna-form { padding: 26px 22px 28px; }
+  .card { padding: 22px; border-radius: 16px; }
+}
+
+/* En celular los pasos se compactan (solo títulos) para que el formulario quede a la vista */
+@media (max-width: 560px) {
+  .encabezado-contenido { padding: 6px 16px; }
+  .logo { height: 52px; }
+  .columna-info { padding: 22px 20px 18px; }
+  .titular { font-size: 26px; }
+  .intro { font-size: 15px; margin-bottom: 16px; }
+  .pasos { gap: 10px; }
+  .paso { grid-template-columns: 32px 1fr; gap: 12px; align-items: center; }
+  .paso-numero { width: 32px; height: 32px; font-size: 15px; }
+  .paso:not(:last-child)::after { left: 15px; top: 34px; bottom: -10px; }
+  .paso h3 { margin: 0; font-size: 16px; }
+  .paso p,
+  .sello-seguridad,
+  .columna-info::after { display: none; }
+  body > .card { margin: 0; border-radius: 0; min-height: 100vh; }
+  .comprobante { padding: 28px 20px 24px; border-radius: 18px; }
+  .comprobante .comprobante-monto { font-size: 38px; }
+  .solicitud { padding: 16px; }
+}

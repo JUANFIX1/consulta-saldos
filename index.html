@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Consulta si tienes saldos a favor pendientes de devolución en FODEOCCI.">
+  <title>Consulta de saldos a favor | FODEOCCI</title>
+  <link rel="icon" href="img/logo-claro.svg">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <div class="encabezado-contenido">
+      <img class="logo" src="img/logo-claro.svg" alt="FODEOCCI">
+      <a data-sitio>Ir al sitio web</a>
+    </div>
+  </header>
+
+  <div class="contenedor">
+    <div class="tarjeta-principal" id="vistaConsulta">
+
+      <!-- COLUMNA INFORMATIVA: LOS 3 PASOS -->
+      <section class="columna-info">
+        <span class="eyebrow">EXASOCIADOS FODEOCCI</span>
+        <h1 class="titular">¿Tienes un saldo a favor?</h1>
+        <p class="intro">Si fuiste asociado de FODEOCCI, puedes tener dineros pendientes de devolución. Así funciona:</p>
+
+        <ol class="pasos">
+          <li class="paso">
+            <span class="paso-numero">1</span>
+            <div>
+              <h3>Consulta</h3>
+              <p>Ingresa tu documento y tu fecha de nacimiento para saber si tienes un saldo a favor.</p>
+            </div>
+          </li>
+          <li class="paso">
+            <span class="paso-numero">2</span>
+            <div>
+              <h3>Envía tu solicitud</h3>
+              <p>Si tienes saldo, envía por correo una certificación bancaria de una cuenta a tu nombre.</p>
+            </div>
+          </li>
+          <li class="paso">
+            <span class="paso-numero">3</span>
+            <div>
+              <h3>Recibe tu devolución</h3>
+              <p>FODEOCCI valida tu información y, si cumples los requisitos, realiza la devolución.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="sello-seguridad">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <span>Tu información está protegida: solo se muestra a quien conoce tu documento y tu fecha de nacimiento.</span>
+        </div>
+      </section>
+
+      <!-- COLUMNA DEL FORMULARIO -->
+      <main class="columna-form">
+        <div class="card">
+
+          <!-- FORMULARIO -->
+          <section id="vistaFormulario">
+            <span class="eyebrow">PASO 1</span>
+            <h2 class="titulo-card">Consulta tu saldo</h2>
+            <p class="muted">Escribe tus datos tal como aparecen en tu documento.</p>
+
+            <form id="formConsulta" novalidate>
+              <label for="tipo">Tipo de documento</label>
+              <select id="tipo" required>
+                <option value="">Selecciona...</option>
+                <option value="CC">Cédula de ciudadanía</option>
+                <option value="CE">Cédula de extranjería</option>
+                <option value="PA">Pasaporte</option>
+              </select>
+
+              <label for="numero">Número de documento</label>
+              <input id="numero" inputmode="numeric" autocomplete="off" placeholder="Sin puntos ni espacios" required>
+
+              <label for="fecha">Fecha de nacimiento</label>
+              <input id="fecha" type="date" required>
+
+              <button type="submit" id="btnConsultar">Consultar</button>
+              <div id="avisoCampos" class="resultado error" hidden></div>
+            </form>
+
+            <p class="nota-privacidad">
+              Al consultar, aceptas el tratamiento de tus datos conforme a nuestra
+              <a data-politica target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>.
+            </p>
+          </section>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- RESULTADO: comprobante centrado (reemplaza las dos columnas) -->
+    <section class="comprobante" id="vistaResultado" hidden aria-live="polite">
+      <div id="resultado"></div>
+      <button type="button" class="link" id="btnNuevaConsulta">Hacer otra consulta</button>
+    </section>
+
+    <footer class="pie">
+      © FODEOCCI ·
+      <a data-politica target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a> ·
+      <a data-sitio>Ir al sitio web</a>
+    </footer>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/consulta.js"></script>
+</body>
+</html>

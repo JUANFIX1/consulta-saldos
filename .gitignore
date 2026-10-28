@@ -1,0 +1,12 @@
+# Archivos que NO se publican en GitHub
+
+# Respaldo del código de Apps Script: vive en Google, no hace falta publicarlo
+apps-script/
+
+# Configuración local de VS Code
+.vscode/
+
+# Nunca subir bases de datos ni archivos de prueba con datos de personas
+*.xlsx
+*.xls
+*.csv

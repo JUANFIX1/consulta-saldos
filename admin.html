@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administración | Saldos a favor FODEOCCI</title>
+  <link rel="icon" href="img/logo-claro.svg">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- INGRESO -->
+  <main class="card" id="vistaLogin">
+    <img class="logo-admin" src="img/logo-claro.svg" alt="FODEOCCI">
+    <h1>Administración</h1>
+    <p class="muted">Acceso exclusivo para personal autorizado de FODEOCCI.</p>
+
+    <form id="formLogin" novalidate>
+      <label for="clave">Clave de administración</label>
+      <input id="clave" type="password" autocomplete="current-password" required>
+      <button type="submit" id="btnIngresar">Ingresar</button>
+      <div id="avisoLogin" class="resultado error" hidden></div>
+    </form>
+  </main>
+
+  <!-- PANEL -->
+  <main class="card ancha" id="vistaPanel" hidden>
+    <div class="panel-encabezado">
+      <div class="marca-admin">
+        <img class="logo-admin" src="img/logo-claro.svg" alt="FODEOCCI">
+        <h1>Panel de administración</h1>
+      </div>
+      <button type="button" class="link" id="btnSalir">Cerrar sesión</button>
+    </div>
+    <p class="muted">Saldos a favor de exasociados.</p>
+
+    <!-- ESTADO -->
+    <section class="bloque">
+      <h2>Estado de la base de datos</h2>
+      <div class="estadisticas">
+        <div class="estadistica"><span>Registros</span><strong id="estTotal">--</strong></div>
+        <div class="estadistica"><span>Con saldo disponible</span><strong id="estConSaldo">--</strong></div>
+        <div class="estadistica"><span>Total saldos disponibles</span><strong id="estSuma">--</strong></div>
+        <div class="estadistica"><span>Fecha de corte</span><strong id="estCorte">--</strong></div>
+        <div class="estadistica"><span>Última actualización</span><strong id="estActualizacion">--</strong></div>
+      </div>
+      <div class="actualizar-datos">
+        <button type="button" class="boton-secundario" id="btnRefrescar">Actualizar datos</button>
+        <span class="nota-hora" id="estHora"></span>
+      </div>
+    </section>
+
+    <!-- CARGA DE EXCEL -->
+    <section class="bloque">
+      <h2>Cargar base de datos (Excel)</h2>
+      <p class="muted">Sube el archivo con los saldos actualizados. Primero se valida; solo si no tiene errores se habilita la carga.</p>
+      <button type="button" class="boton-secundario" id="btnPlantilla">Descargar plantilla de Excel</button>
+
+      <label for="archivoExcel">Archivo (.xlsx, .xls o .csv)</label>
+      <input type="file" id="archivoExcel" accept=".xlsx,.xls,.csv">
+
+      <div class="acciones-carga">
+        <button type="button" id="btnValidar">Validar archivo</button>
+      </div>
+
+      <div id="avisoCarga" class="resultado" hidden></div>
+
+      <div id="detalleErrores" hidden>
+        <div class="contenedor-tabla">
+          <table class="tabla-errores">
+            <thead><tr><th>Fila</th><th>Documento</th><th>Problema</th></tr></thead>
+            <tbody id="cuerpoErrores"></tbody>
+          </table>
+        </div>
+        <p class="muted" id="notaErrores" hidden></p>
+      </div>
+
+      <div id="confirmacionCarga" hidden>
+        <p class="advertencia">Al confirmar, esta información <strong>reemplaza por completo</strong> la base actual. La versión anterior queda guardada en la pestaña oculta <strong>Respaldo_Saldos</strong> del Google Sheet.</p>
+        <div class="acciones-carga">
+          <button type="button" id="btnConfirmar">Confirmar carga</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMINISTRAR REGISTROS -->
+    <section class="bloque">
+      <h2>Administrar registros</h2>
+      <p class="muted">Busca a un exasociado para ver su información, corregirla o eliminarla. Por ejemplo, para marcar como <strong>No disponible</strong> un saldo que ya fue devuelto.</p>
+
+      <form id="formBuscar" class="fila-form" novalidate>
+        <div>
+          <label for="buscarTipo">Tipo</label>
+          <select id="buscarTipo">
+            <option value="">Selecciona...</option>
+            <option value="CC">Cédula de ciudadanía</option>
+            <option value="CE">Cédula de extranjería</option>
+            <option value="PA">Pasaporte</option>
+          </select>
+        </div>
+        <div>
+          <label for="buscarNumero">Número de documento</label>
+          <input id="buscarNumero" autocomplete="off">
+        </div>
+        <button type="submit" id="btnBuscar">Buscar</button>
+      </form>
+
+      <div id="avisoRegistro" class="resultado" hidden></div>
+
+      <form id="formRegistro" class="ficha" hidden novalidate>
+        <p class="ficha-documento">Documento: <strong id="fichaDocumento"></strong></p>
+        <div class="ficha-campos">
+          <div>
+            <label for="regNombre">Nombre completo</label>
+            <input id="regNombre" autocomplete="off">
+          </div>
+          <div>
+            <label for="regNacimiento">Fecha de nacimiento</label>
+            <input id="regNacimiento" type="date">
+          </div>
+          <div>
+            <label for="regValor">Valor del saldo</label>
+            <input id="regValor" type="number" min="0" step="1">
+          </div>
+          <div>
+            <label for="regEstado">Estado</label>
+            <select id="regEstado">
+              <option value="Disponible">Disponible</option>
+              <option value="No disponible">No disponible</option>
+            </select>
+          </div>
+          <div>
+            <label for="regCorte">Fecha de corte</label>
+            <input id="regCorte" type="date">
+          </div>
+        </div>
+        <div class="acciones-carga">
+          <button type="submit" id="btnGuardar">Guardar cambios</button>
+          <button type="button" class="boton-peligro" id="btnEliminar">Eliminar registro</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- DESBLOQUEO -->
+    <section class="bloque">
+      <h2>Desbloquear documento</h2>
+      <p class="muted">Úsalo cuando un exasociado quede bloqueado por intentos fallidos y se comunique con FODEOCCI.</p>
+      <form id="formDesbloquear" class="fila-form" novalidate>
+        <div>
+          <label for="desTipo">Tipo</label>
+          <select id="desTipo">
+            <option value="">Selecciona...</option>
+            <option value="CC">Cédula de ciudadanía</option>
+            <option value="CE">Cédula de extranjería</option>
+            <option value="PA">Pasaporte</option>
+          </select>
+        </div>
+        <div>
+          <label for="desNumero">Número de documento</label>
+          <input id="desNumero" autocomplete="off">
+        </div>
+        <button type="submit" id="btnDesbloquear">Desbloquear</button>
+      </form>
+      <div id="avisoDesbloqueo" class="resultado" hidden></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/vendor/xlsx.full.min.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

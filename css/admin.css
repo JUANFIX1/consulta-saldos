@@ -1,0 +1,130 @@
+/* Estilos exclusivos del panel de administración (complementan estilos.css) */
+
+.card.ancha { max-width: 860px; }
+
+/* ---------------------------------------------------------------- Logo y encabezado */
+
+.logo-admin { height: 64px; width: auto; display: block; margin: -8px 0 4px; }
+
+.panel-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.panel-encabezado .link { margin: 0; }
+
+.marca-admin { display: flex; align-items: center; gap: 14px; }
+.marca-admin .logo-admin { margin-bottom: 0; }
+
+/* ---------------------------------------------------------------- Secciones */
+
+.bloque {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 22px;
+}
+.bloque h2 { font-size: 18px; margin: 0 0 4px; }
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.estadistica { background: var(--bg); border-radius: 12px; padding: 14px; }
+.estadistica span { display: block; font-size: 12px; color: var(--muted); }
+.estadistica strong { display: block; font-size: 18px; margin-top: 6px; }
+
+.fila-form {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+.fila-form label { margin-top: 0; }
+.fila-form button { margin-top: 0; width: auto; padding: 13px 20px; }
+
+/* ---------------------------------------------------------------- Botones */
+
+.boton-secundario {
+  width: auto;
+  margin-top: 14px;
+  padding: 10px 16px;
+  background: white;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}
+.boton-secundario:hover { background: var(--info-bg); }
+
+.actualizar-datos { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.nota-hora { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+.boton-peligro {
+  background: white;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+.boton-peligro:hover { background: var(--danger-bg); }
+
+.acciones-carga { display: flex; flex-wrap: wrap; gap: 10px; }
+.acciones-carga button { width: auto; margin-top: 14px; padding: 12px 20px; }
+
+.resultado.ok { background: var(--green-bg); color: var(--green); }
+
+/* ---------------------------------------------------------------- Carga de Excel */
+
+input[type="file"] { padding: 10px; }
+
+.contenedor-tabla {
+  max-height: 320px;
+  overflow: auto;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.tabla-errores { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tabla-errores th,
+.tabla-errores td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.tabla-errores th { position: sticky; top: 0; background: var(--bg); }
+
+.advertencia {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff8e6;
+  color: #7a5200;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------- Ficha de registro */
+
+.ficha {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+}
+.ficha-documento { margin: 0 0 4px; color: var(--muted); }
+.ficha-documento strong { color: var(--navy); font-size: 17px; }
+.ficha-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 14px;
+}
+
+/* ---------------------------------------------------------------- Celulares */
+
+@media (max-width: 560px) {
+  .fila-form { grid-template-columns: 1fr; }
+  .fila-form button,
+  .acciones-carga button { width: 100%; }
+  .panel-encabezado { flex-direction: column; align-items: flex-start; }
+}
