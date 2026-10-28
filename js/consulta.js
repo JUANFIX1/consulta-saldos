@@ -68,18 +68,16 @@ function mostrarResultado(data, tipo, numero) {
       crearCon("span", "eyebrow", "RESULTADO DE TU CONSULTA"),
       crear("h2", "¡Tienes un saldo a favor en FODEOCCI!"),
       crearCon("p", "comprobante-monto", dinero(data.valor)),
-      crear("p", "De acuerdo con nuestros registros, tienes un saldo a favor por valor de ",
-        crear("strong", dinero(data.valor)), ", con corte al " + data.fechaCorte + "."),
+      crear("p", "Saldo a favor registrado en FODEOCCI, con corte al " + data.fechaCorte),
       detalles([
         ["Titular", data.nombre],
-        ["Documento", tipo + " " + enmascarar(numero)],
-        ["Fecha de corte", data.fechaCorte]
+        ["Documento", tipo + " " + enmascarar(numero)]
       ]),
       crearCon("div", "solicitud",
         crearCon("span", "eyebrow", "PASO 2 · ENVÍA TU SOLICITUD"),
-        crear("p", "Para solicitar su devolución, envía una certificación bancaria de una cuenta a tu nombre al correo electrónico ",
+        crear("p", "Para solicitar la devolución, envía una certificación bancaria de una cuenta a tu nombre al correo ",
           crear("strong", CONFIG.CORREO_PARA), ", con copia a ", crear("strong", CONFIG.CORREO_COPIA), "."),
-        crear("p", "La devolución estará sujeta a la validación de la información y al cumplimiento de los requisitos establecidos por FODEOCCI."),
+        crear("p", "FODEOCCI verificará la información y gestionará la devolución de acuerdo con los requisitos establecidos."),
         ...accionesCorreo(armarCorreo(data, tipo, numero))
       )
     );
