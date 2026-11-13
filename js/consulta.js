@@ -78,11 +78,14 @@ function mostrarResultado(data, tipo, numero) {
         ["Documento", tipo + " " + enmascarar(numero)]
       ]),
       crearCon("div", "solicitud",
-        crearCon("span", "eyebrow", "PASO 2 · ENVÍA TU SOLICITUD"),
-        crear("p", "Para solicitar la devolución, envía una certificación bancaria de una cuenta a tu nombre al correo ",
+        crearCon("span", "eyebrow", "PASO 2 · SOLICITA TU DEVOLUCIÓN"),
+        crear("p", "Para solicitar la devolución de tu saldo a favor, envíanos una certificación bancaria de una cuenta bancaria a tu nombre al correo ",
           crear("strong", CONFIG.CORREO_PARA), ", con copia a ", crear("strong", CONFIG.CORREO_COPIA), "."),
-        crear("p", "FODEOCCI verificará la información y gestionará la devolución de acuerdo con los requisitos establecidos."),
-        ...accionesCorreo(armarCorreo(data, tipo, numero))
+        crear("p", "Una vez recibamos tu solicitud, verificaremos la información y gestionaremos la devolución de acuerdo con los requisitos establecidos."),
+        crearCon("p", "solicitud-pregunta", "¿Cómo deseas continuar?"),
+        ...accionesCorreo(armarCorreo(data, tipo, numero)),
+        botonWhatsapp(data, tipo, numero),
+        crearCon("p", "solicitud-nota", "Recuerda adjuntar tu certificación bancaria si realizas la solicitud por correo.")
       )
     );
 
@@ -201,8 +204,7 @@ function accionesCorreo(correo) {
   const opciones = crearCon("div", "opciones-envio",
     crearCon("p", "opciones-titulo", "¿Desde dónde quieres enviarla?"),
     crearCon("div", "opciones-lista", gmail, outlook, aplicacion, copiar),
-    estado,
-    crearCon("p", "opciones-nota", "Recuerda adjuntar la certificación bancaria antes de enviar el correo.")
+    estado
   );
   opciones.hidden = true;
 
@@ -212,6 +214,20 @@ function accionesCorreo(correo) {
   });
 
   return [botonCorreo, opciones];
+}
+
+// Botón "Comunicarme con un asesor por WhatsApp", con un mensaje ya escrito
+function botonWhatsapp(data, tipo, numero) {
+  const mensaje =
+    "Hola, soy " + data.nombre + ", documento " + tipo + " " + numero + ". " +
+    "Consulté en la página de FODEOCCI que tengo un saldo a favor de " + dinero(data.valor) +
+    " con corte al " + data.fechaCorte + " y quiero recibir orientación para solicitar la devolución.";
+
+  const boton = crearCon("a", "boton boton-whatsapp", "Comunicarme con un asesor por WhatsApp");
+  boton.href = "https://wa.me/" + CONFIG.WHATSAPP_NUMERO + "?text=" + encodeURIComponent(mensaje);
+  boton.target = "_blank";
+  boton.rel = "noopener";
+  return boton;
 }
 
 function enlaceExterno(texto, url) {

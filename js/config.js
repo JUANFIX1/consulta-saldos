@@ -9,6 +9,9 @@ const CONFIG = {
   CORREO_COPIA: "gerencia@fodeocci.com.co",
   ASUNTO_CORREO: "Solicitud de devolución de saldo a favor – FODEOCCI",
 
+  // WhatsApp de asesores: código de país + número, sin espacios ni "+" (57 = Colombia)
+  WHATSAPP_NUMERO: "573107373942",
+
   // Enlaces institucionales
   POLITICA_DATOS_URL: "PEGA_AQUI_URL_DE_LA_POLITICA_DE_DATOS",
   SITIO_WEB_URL: "https://fodeocci.com.co",

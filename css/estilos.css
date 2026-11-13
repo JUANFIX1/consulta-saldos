@@ -316,8 +316,15 @@ button:disabled { opacity: .6; cursor: default; }
   cursor: pointer;
 }
 .opcion-envio:hover { border-color: var(--cyan); background: var(--info-bg); }
-.opciones-nota { margin: 12px 0 0 !important; font-size: 13px; }
 .estado-copiado { display: block; margin-top: 10px; color: var(--green); font-weight: 700; }
+
+/* Pregunta, botón de WhatsApp y nota final del Paso 2 */
+.solicitud .solicitud-pregunta { margin: 18px 0 0; font-weight: 700; color: var(--text); }
+.solicitud .boton:first-of-type { margin-top: 10px; }
+.boton-whatsapp,
+.boton-whatsapp:hover { margin-top: 10px; background: #128c4b; }
+.boton-whatsapp:hover { background: #0e723d; }
+.solicitud .solicitud-nota { margin: 14px 0 0; font-size: 13px; font-style: italic; }
 
 /* ---------------------------------------------------------------- Pie de página */
 
